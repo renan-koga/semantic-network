@@ -63,39 +63,73 @@ if __name__ == "__main__":
 		node2 = splitted[2]
 
 		paths = networkx.all_simple_paths(GRAPH, source=node1, target=node2)
-		print(list(paths))
-		exit(1)
+		# print(list(paths))
+		# exit(1)
 
 		logic = True
 		e_um = False
 		tem = False
 		others = False
 		for path in paths:
+			once = False
 			for i in range(len(path) - 1):
 				node1 = path[i]
 				node2 = path[i+1]
-				if GRAPH[node1][node2]["relacao"] == "e_um":
-					e_um = True
-				elif GRAPH[node1][node2]["relacao"] == "tem":
-					tem = True
-				else:
-					if not others:
-						others = True
-					else:
+				aux_link = GRAPH[node1][node2]["relacao"]
+
+				if link == "e_um":
+					if aux_link != "e_um":
 						logic = False
-						break
+				elif link == "tem":
+					if aux_link != "e_um" and aux_link != "tem":
+						logic = False
+				else:
+					if aux_link != "e_um":
+						if aux_link == link:
+							if once:
+								logic = False
+							else:
+								once = True
+						else:
+							logic = False
+
+				# if others:
+				# 	if link != "e_um":
+				# 		logic = False
+				
+				# else:
+				# 	if link == "e_um":
+				# 		e_um = True
+				# 	elif link == "tem":
+				# 		tem = True
+				# 	else:
+				# 		others = True
+
+				# if GRAPH[node1][node2]["relacao"] == "e_um":
+				# 	e_um = True
+				# elif GRAPH[node1][node2]["relacao"] == "tem":
+				# 	tem = True
+				# else:
+				# 	if not others:
+				# 		others = True
+				# 	else:
+				# 		logic = False
+				# 		break
 			# print(path)
 
-		if logic:
-			print("BOA CARAI")
+			if logic:
+				print("Verdadeiro")
+				break
 
+		if not logic:
+			print("Falso")
 
-		exit(1)
+		# exit(1)
 
-		logic = checkSentence(node1, link, node2, "", 0)
-		if logic:
-			print("OK!")
-		else:
-			print("Deu Ruim!")
+		# logic = checkSentence(node1, link, node2, "", 0)
+		# if logic:
+		# 	print("OK!")
+		# else:
+		# 	print("Deu Ruim!")
 		
 		# exit(1)
