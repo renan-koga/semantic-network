@@ -59,7 +59,14 @@ if __name__ == "__main__":
 									logic = False
 
 					if logic:
-						print("Verdadeiro")
+						print("Verdadeiro\n")
+						for i in range(len(path) - 1):
+							node1 = path[i]
+							node2 = path[i+1]
+							aux_link = GRAPH.getEdge(node1, node2)
+
+							print(node1 + " " + aux_link + " " + node2)
+
 						break
 
 				if not logic:
