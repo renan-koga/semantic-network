@@ -33,7 +33,7 @@ if __name__ == "__main__":
 		paths = GRAPH.getPath(node1, node2)
 
 		logic = True
-		if paths is not None:
+		if paths:
 			if len(paths) > 0:
 				for path in paths:
 					once = False
